@@ -21,13 +21,18 @@ const PLANES = [
 		"id": "dhc4",
 		"name": "De Havilland Dash 8-400",
 		"capacity": 75,
-		"maxRange": 1102,
+		"maxRange": 1000,
 		"type": "Turboprop Short-Haul",
 		"speed": 270,
 		"condition": 100,
 		"efficiency": 0.7,
 		"route": "XXX-XXX",
 		"status": "onground",
+		"upgrades": {
+			"wifi": false,
+			"ife_screens": false,
+			"first_class": false,
+			},
 	},
 	
 	{
@@ -41,6 +46,11 @@ const PLANES = [
 		"efficiency": 0.9,
 		"route": "XXX-XXX",
 		"status": "onground",
+		"upgrades": {
+			"wifi": false,
+			"ife_screens": false,
+			"first_class": false,
+			},
 	},
 	
 	{
@@ -54,6 +64,11 @@ const PLANES = [
 		"efficiency": 1.0,
 		"route": "XXX-XXX",
 		"status": "onground",
+		"upgrades": {
+			"wifi": false,
+			"ife_screens": false,
+			"first_class": false,
+			},
 	},
 	
 	{
@@ -67,10 +82,225 @@ const PLANES = [
 		"efficiency": 1.2,
 		"route": "XXX-XXX",
 		"status": "onground",
+		"upgrades": {
+			"wifi": false,
+			"ife_screens": false,
+			"first_class": false,
+			},
 	}
 ]
 
-
+const AIRPORTS = [
+	# distance: NMi
+	{
+		"code": "YYC",
+		"name": "Calgary Int'l",
+		"type": "hub",
+		"fee": 0,
+		"demand": {
+			"intl": 0.7,
+			"dom": 1.0,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": ["YYC-YVR"],
+		"unlocked": true,
+		"distance": 0,
+	},
+	
+	{
+		"code": "YVR",
+		"name": "Vancouver Int'l",
+		"type": "domestic",
+		"fee": 10000,
+		"demand": {
+			"intl": 1.0,
+			"dom": 1.0,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": ["YVR-YYC"],
+		"unlocked": true,
+		"distance": 540,
+		},
+		
+		{
+		"code": "YYZ",
+		"name": "Toronto Pearson Int'l",
+		"type": "domestic",
+		"fee": 20000,
+		"demand": {
+			"intl": 1.1,
+			"dom": 1.0,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 1700,
+		},
+		
+		{
+		"code": "SFO",
+		"name": "San Francisco Int'l",
+		"type": "international",
+		"fee": 30000,
+		"demand": {
+			"intl": 1.2,
+			"dom": 0.9,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 1100,
+		},
+		
+		{
+		"code": "LAX",
+		"name": "Los Angeles Int'l",
+		"type": "international",
+		"fee": 50000,
+		"demand": {
+			"intl": 1.4,
+			"dom": 1,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 1200,
+		},
+		
+		{
+		"code": "JFK",
+		"name": "John F. Kennedy Int'l",
+		"type": "international",
+		"fee": 80000,
+		"demand": {
+			"intl": 1.5,
+			"dom": 1.2,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 2100,
+		},
+		
+		{
+		"code": "MEX",
+		"name": "Mexico City Int'l",
+		"type": "international",
+		"fee": 80000,
+		"demand": {
+			"intl": 1.5,
+			"dom": 1,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 2500,
+		},
+		
+		{
+		"code": "LHR",
+		"name": "London Heathrow",
+		"type": "international",
+		"fee": 140000,
+		"demand": {
+			"intl": 1.6,
+			"dom": 1,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 3800,
+		},
+		
+		{
+		"code": "ZRH",
+		"name": "Zürich Int'l",
+		"type": "international",
+		"fee": 100000,
+		"demand": {
+			"intl": 1.6,
+			"dom": 1,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 4100,
+		},
+		
+		{
+		"code": "FRA",
+		"name": "Frankfurt Int'l",
+		"type": "international",
+		"fee": 120000,
+		"demand": {
+			"intl": 1.6,
+			"dom": 1,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 4000,
+		},
+		
+		{
+		"code": "SIN",
+		"name": "Singapore Int'l",
+		"type": "international",
+		"fee": 140000,
+		"demand": {
+			"intl": 1.7,
+			"dom": 1,
+			},
+		"upgrades": {
+			"lounge": false,
+			"eco_fuel": false,
+			"jetbridges": false,
+			},
+		"connected_routes": [],
+		"unlocked": false,
+		"distance": 7100,
+		},
+]
 
 var file
 
