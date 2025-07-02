@@ -1,12 +1,11 @@
 extends Node
 
-const planes = [
+const PLANES = [
 	
 	# 0 - dash 8
 	# 1 - a220
 	# 2 - a330
 	# 3 - a350
-	
 	
 	# UNITS!!!
 	# i don wna put it in the key names to keep it clean
@@ -71,8 +70,32 @@ const planes = [
 	}
 ]
 
+
+
+var file
+
+var save_file = {}
+
 func _ready():
-	pass
+	if not FileAccess.file_exists("user://airfleet.save"):
+		save_file = {
+			"planes": [PLANES[0].duplicate(true)]
+		}
+	else:
+		load_save()
 
 func _process(delta):
 	pass
+
+func save(data):
+	var json = JSON.stringify(data)
+	var file = FileAccess.open("user://airfleet.save", FileAccess.WRITE)
+	file.store_string(json)
+	file.close()
+
+func load_save():
+	if FileAccess.file_exists("user://airfleet.save"):
+		var file = FileAccess.open("user://airfleet.save", FileAccess.READ)
+		var content = file.get_as_text()
+		file.close()
+		save_file = JSON.parse_string(content)
