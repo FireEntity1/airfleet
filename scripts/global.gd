@@ -27,7 +27,7 @@ const PLANES = [
 		"speed": 270,
 		"condition": 100,
 		"efficiency": 0.7,
-		"route": "XXX-XXX",
+		"route": ["XXX","XXX"],
 		"status": "onground",
 		"upgrades": {
 			"wifi": false,
@@ -46,7 +46,7 @@ const PLANES = [
 		"speed": 490,
 		"condition": 100,
 		"efficiency": 0.9,
-		"route": "XXX-XXX",
+		"route": ["XXX","XXX"],
 		"status": "onground",
 		"upgrades": {
 			"wifi": false,
@@ -65,7 +65,7 @@ const PLANES = [
 		"speed": 520,
 		"condition": 100,
 		"efficiency": 1.0,
-		"route": "XXX-XXX",
+		"route": ["XXX","XXX"],
 		"status": "onground",
 		"upgrades": {
 			"wifi": false,
@@ -84,7 +84,7 @@ const PLANES = [
 		"speed": 570,
 		"condition": 100,
 		"efficiency": 1.2,
-		"route": "XXX-XXX",
+		"route": ["XXX","XXX"],
 		"status": "onground",
 		"upgrades": {
 			"wifi": false,
@@ -95,215 +95,127 @@ const PLANES = [
 ]
 
 const AIRPORTS = [
-	# distance: NMi
 	{
 		"code": "YYC",
 		"name": "Calgary Int'l",
 		"type": "hub",
 		"fee": 0,
-		"demand": {
-			"intl": 0.7,
-			"dom": 1.0,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
-		"connected_routes": ["YYC-YVR"],
+		"demand": { "intl": 0.7, "dom": 1.0 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
+		"connected_routes": [["YYC", "YVR"]],
 		"unlocked": true,
-		"distance": 0,
+		"distance": { "YYC": 0, "YVR": 540, "YYZ": 1700 },
 	},
-	
 	{
 		"code": "YVR",
 		"name": "Vancouver Int'l",
 		"type": "domestic",
 		"fee": 10000,
-		"demand": {
-			"intl": 1.0,
-			"dom": 1.0,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.0, "dom": 1.0 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": ["YVR-YYC"],
 		"unlocked": true,
-		"distance": 540,
-		},
-		
-		{
+		"distance": { "YYC": 540, "YVR": 0, "YYZ": 2100 },
+	},
+	{
 		"code": "YYZ",
 		"name": "Toronto Pearson Int'l",
 		"type": "domestic",
 		"fee": 20000,
-		"demand": {
-			"intl": 1.1,
-			"dom": 1.0,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.1, "dom": 1.0 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 1700,
-		},
-		
-		{
+		"distance": { "YYC": 1700, "YVR": 2100, "YYZ": 0 },
+	},
+	{
 		"code": "SFO",
 		"name": "San Francisco Int'l",
 		"type": "international",
 		"fee": 30000,
-		"demand": {
-			"intl": 1.2,
-			"dom": 0.9,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.2, "dom": 0.9 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 1100,
-		},
-		
-		{
+		"distance": { "YYC": 1100, "YVR": 900, "YYZ": 2200 },
+	},
+	{
 		"code": "LAX",
 		"name": "Los Angeles Int'l",
 		"type": "international",
 		"fee": 50000,
-		"demand": {
-			"intl": 1.4,
-			"dom": 1,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.4, "dom": 1 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 1200,
-		},
-		
-		{
+		"distance": { "YYC": 1200, "YVR": 1100, "YYZ": 2300 },
+	},
+	{
 		"code": "JFK",
 		"name": "John F. Kennedy Int'l",
 		"type": "international",
 		"fee": 80000,
-		"demand": {
-			"intl": 1.5,
-			"dom": 1.2,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.5, "dom": 1.2 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 2100,
-		},
-		
-		{
+		"distance": { "YYC": 2100, "YVR": 2500, "YYZ": 400 },
+	},
+	{
 		"code": "MEX",
 		"name": "Mexico City Int'l",
 		"type": "international",
 		"fee": 80000,
-		"demand": {
-			"intl": 1.5,
-			"dom": 1,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.5, "dom": 1 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 2500,
-		},
-		
-		{
+		"distance": { "YYC": 2500, "YVR": 2300, "YYZ": 2100 },
+	},
+	{
 		"code": "LHR",
 		"name": "London Heathrow",
 		"type": "international",
 		"fee": 140000,
-		"demand": {
-			"intl": 1.6,
-			"dom": 1,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.6, "dom": 1 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 3800,
-		},
-		
-		{
+		"distance": { "YYC": 3800, "YVR": 4400, "YYZ": 3600 },
+	},
+	{
 		"code": "ZRH",
 		"name": "Zürich Int'l",
 		"type": "international",
 		"fee": 100000,
-		"demand": {
-			"intl": 1.6,
-			"dom": 1,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.6, "dom": 1 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 4100,
-		},
-		
-		{
+		"distance": { "YYC": 4100, "YVR": 4700, "YYZ": 3900 },
+	},
+	{
 		"code": "FRA",
 		"name": "Frankfurt Int'l",
 		"type": "international",
 		"fee": 120000,
-		"demand": {
-			"intl": 1.6,
-			"dom": 1,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.6, "dom": 1 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 4000,
-		},
-		
-		{
+		"distance": { "YYC": 4000, "YVR": 4600, "YYZ": 3800 },
+	},
+	{
 		"code": "SIN",
 		"name": "Singapore Int'l",
 		"type": "international",
 		"fee": 140000,
-		"demand": {
-			"intl": 1.7,
-			"dom": 1,
-			},
-		"upgrades": {
-			"lounge": false,
-			"eco_fuel": false,
-			"jetbridges": false,
-			},
+		"demand": { "intl": 1.7, "dom": 1 },
+		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
 		"unlocked": false,
-		"distance": 7100,
-		},
+		"distance": { "YYC": 7100, "YVR": 7700, "YYZ": 8200 },
+	},
 ]
 
 const ICONS = {

@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1h51enobhpkj"]
+
+[ext_resource type="Theme" uid="uid://pu68ght6npmo" path="res://resources/theme.tres" id="1_cxbdo"]
+[ext_resource type="Script" path="res://scripts/routes.gd" id="1_mkb65"]
+
+[node name="Routes" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cxbdo")
+script = ExtResource("1_mkb65")
+
+[node name="from" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 51.0
+offset_bottom = 39.0
+
+[node name="to" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 0
+offset_left = 449.0
+offset_top = 2.0
+offset_right = 749.0
+offset_bottom = 52.0
+
+[node name="route_direction" type="Label" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 6.0
+offset_right = 392.0
+offset_bottom = 51.0
+text = "to"
+
+[node name="distance" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1198.0
+offset_top = 13.0
+offset_right = 1884.0
+offset_bottom = 118.0
+
+[node name="planes" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1198.0
+offset_top = 256.0
+offset_right = 1884.0
+offset_bottom = 624.0
+
+[connection signal="item_selected" from="from" to="." method="_on_from_item_selected"]
+[connection signal="item_selected" from="to" to="." method="_on_to_item_selected"]

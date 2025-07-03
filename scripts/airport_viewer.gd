@@ -31,8 +31,6 @@ func _on_airport_picker_item_selected(index):
 		$eco_fuel.icon = Global.ICONS.unlocked
 	else:
 		$eco_fuel.icon = Global.ICONS.locked
-	
-
 
 func _on_lounge_button_up():
 	if not Global.save_file.airports[active_airport].upgrades.lounge:

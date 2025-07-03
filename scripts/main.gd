@@ -8,11 +8,10 @@ func _ready():
 		var scene = preload("res://components/list_item_plane.tscn").instantiate()
 		scene.plane = plane
 		scene.sprite = load("res://sprites/temp_plane.png")
-		$tabs/planes/planes.add_child(scene)
+		$tabs/shop/planes.add_child(scene)
 
 func _process(delta):
 	pass
-
 
 func _on_reset_button_up():
 	Global.save(Global.BASE_SAVE_FILE)

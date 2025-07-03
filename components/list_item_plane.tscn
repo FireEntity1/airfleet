@@ -52,3 +52,13 @@ offset_bottom = 303.0
 theme_override_font_sizes/font_size = 50
 text = "RANGE: "
 horizontal_alignment = 1
+
+[node name="buy" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1420.0
+offset_top = 38.0
+offset_right = 1646.0
+offset_bottom = 139.0
+text = "BUY"
+
+[connection signal="button_up" from="buy" to="." method="_on_buy_button_up"]
