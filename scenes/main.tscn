@@ -24,9 +24,10 @@ grow_vertical = 2
 theme = ExtResource("1_d0r42")
 theme_override_font_sizes/font_size = 48
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="planes" type="ScrollContainer" parent="tabs"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -37,3 +38,14 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="RESET" type="VBoxContainer" parent="tabs"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="reset" type="Button" parent="tabs/RESET"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "RESET"
+
+[connection signal="button_up" from="tabs/RESET/reset" to="." method="_on_reset_button_up"]

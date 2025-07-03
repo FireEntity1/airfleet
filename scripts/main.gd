@@ -12,3 +12,7 @@ func _ready():
 
 func _process(delta):
 	pass
+
+
+func _on_reset_button_up():
+	Global.save(Global.BASE_SAVE_FILE)

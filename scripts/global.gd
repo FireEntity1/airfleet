@@ -315,12 +315,14 @@ var file
 
 var save_file = {}
 
+const BASE_SAVE_FILE = {
+			"planes": [PLANES[0]],
+			"airports": AIRPORTS
+		}
+
 func _ready():
 	if not FileAccess.file_exists("user://airfleet.save"):
-		save_file = {
-			"planes": [PLANES[0].duplicate(true)],
-			"airports": AIRPORTS.duplicate(true)
-		}
+		save_file = BASE_SAVE_FILE
 		save(save_file)
 	else:
 		load_save()
