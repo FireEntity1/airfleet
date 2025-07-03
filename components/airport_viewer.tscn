@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://chwdp2b5qn7lw"]
+
+[ext_resource type="Theme" uid="uid://pu68ght6npmo" path="res://resources/theme.tres" id="1_chqa0"]
+[ext_resource type="Script" path="res://scripts/airport_viewer.gd" id="1_llvho"]
+[ext_resource type="Texture2D" uid="uid://cg5f007vs3f7q" path="res://sprites/locked.png" id="3_t5h3s"]
+
+[node name="airport_viewer" type="Control"]
+custom_minimum_size = Vector2(1920, 900)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 800.0
+grow_horizontal = 2
+theme = ExtResource("1_chqa0")
+script = ExtResource("1_llvho")
+
+[node name="airport_picker" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 51.0
+offset_bottom = 39.0
+
+[node name="code" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1536.0
+offset_top = 6.0
+offset_right = 1876.0
+offset_bottom = 255.0
+theme_override_font_sizes/font_size = 182
+text = "XXX"
+
+[node name="name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 30.0
+offset_right = 1466.0
+offset_bottom = 118.0
+theme_override_font_sizes/font_size = 64
+text = "XXX"
+horizontal_alignment = 1
+
+[node name="lounge" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1548.0
+offset_top = 244.0
+offset_right = 1854.0
+offset_bottom = 348.0
+theme = ExtResource("1_chqa0")
+theme_override_constants/icon_max_width = 48
+theme_override_font_sizes/font_size = 32
+text = "LOUNGE"
+icon = ExtResource("3_t5h3s")
+expand_icon = true
+
+[node name="jetbridge" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1548.0
+offset_top = 392.0
+offset_right = 1854.0
+offset_bottom = 496.0
+theme = ExtResource("1_chqa0")
+theme_override_constants/icon_max_width = 48
+theme_override_font_sizes/font_size = 32
+text = "JETBRIDGE"
+icon = ExtResource("3_t5h3s")
+expand_icon = true
+
+[node name="eco_fuel" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1548.0
+offset_top = 542.0
+offset_right = 1854.0
+offset_bottom = 646.0
+theme = ExtResource("1_chqa0")
+theme_override_constants/icon_max_width = 48
+theme_override_font_sizes/font_size = 32
+text = "ECONOMY FUEL"
+icon = ExtResource("3_t5h3s")
+expand_icon = true
+
+[connection signal="item_selected" from="airport_picker" to="." method="_on_airport_picker_item_selected"]
+[connection signal="button_up" from="lounge" to="." method="_on_lounge_button_up"]
+[connection signal="button_up" from="jetbridge" to="." method="_on_jetbridge_button_up"]
+[connection signal="button_up" from="eco_fuel" to="." method="_on_eco_fuel_button_up"]

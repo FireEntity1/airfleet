@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd8huxrmmt70o"]
+
+[ext_resource type="Script" path="res://scripts/list_item_plane.gd" id="1_wok0s"]
+[ext_resource type="Theme" uid="uid://pu68ght6npmo" path="res://resources/theme.tres" id="1_yq38w"]
+[ext_resource type="Texture2D" uid="uid://sk1y5adtwsl4" path="res://sprites/temp_plane.png" id="2_ntwb0"]
+
+[node name="ListItemPlane" type="Control"]
+custom_minimum_size = Vector2(1920, 350)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 350.0
+grow_horizontal = 2
+theme = ExtResource("1_yq38w")
+script = ExtResource("1_wok0s")
+
+[node name="plane" type="Sprite2D" parent="."]
+position = Vector2(623, 165)
+scale = Vector2(0.202163, 0.202163)
+texture = ExtResource("2_ntwb0")
+
+[node name="name" type="Label" parent="."]
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 1923.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 64
+text = "AIRBUS XXXXXXX"
+horizontal_alignment = 1
+
+[node name="cost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1235.0
+offset_top = 150.0
+offset_right = 1816.0
+offset_bottom = 232.0
+theme_override_font_sizes/font_size = 50
+text = "$ XXX XXX XXX"
+horizontal_alignment = 1
+
+[node name="range" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1235.0
+offset_top = 221.0
+offset_right = 1816.0
+offset_bottom = 303.0
+theme_override_font_sizes/font_size = 50
+text = "RANGE: "
+horizontal_alignment = 1

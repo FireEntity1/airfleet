@@ -20,6 +20,7 @@ const PLANES = [
 	{
 		"id": "dhc4",
 		"name": "De Havilland Dash 8-400",
+		"cost": 20000000,
 		"capacity": 75,
 		"maxRange": 1000,
 		"type": "Turboprop Short-Haul",
@@ -38,6 +39,7 @@ const PLANES = [
 	{
 		"id": "bsc3",
 		"name": "Airbus A220",
+		"cost": 90000000,
 		"capacity": 100,
 		"maxRange": 4000,
 		"type": "Jet Short-Haul",
@@ -56,6 +58,7 @@ const PLANES = [
 	{
 		"id": "a338",
 		"name": "Airbus A330-800neo",
+		"cost": 300000000,
 		"capacity": 280,
 		"maxRange": 8150,
 		"type": "Jet Medium-Haul",
@@ -74,6 +77,7 @@ const PLANES = [
 	{
 		"id": "a359",
 		"name": "Airbus A350-1000ULR",
+		"cost": 380000000,
 		"capacity": 400,
 		"maxRange": 9700,
 		"type": "Jet Long-Haul",
@@ -302,6 +306,11 @@ const AIRPORTS = [
 		},
 ]
 
+const ICONS = {
+	"locked": preload("res://sprites/locked.png"),
+	"unlocked": preload("res://sprites/unlocked.png")
+}
+
 var file
 
 var save_file = {}
@@ -309,8 +318,10 @@ var save_file = {}
 func _ready():
 	if not FileAccess.file_exists("user://airfleet.save"):
 		save_file = {
-			"planes": [PLANES[0].duplicate(true)]
+			"planes": [PLANES[0].duplicate(true)],
+			"airports": AIRPORTS.duplicate(true)
 		}
+		save(save_file)
 	else:
 		load_save()
 
