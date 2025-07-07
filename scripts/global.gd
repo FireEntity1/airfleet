@@ -20,6 +20,7 @@ const PLANES = [
 	{
 		"id": "dhc4",
 		"name": "De Havilland Dash 8-400",
+		"registration": "C-XXXX",
 		"cost": 20000000,
 		"capacity": 75,
 		"maxRange": 1000,
@@ -39,6 +40,7 @@ const PLANES = [
 	{
 		"id": "bsc3",
 		"name": "Airbus A220",
+		"registration": "C-XXXX",
 		"cost": 90000000,
 		"capacity": 100,
 		"maxRange": 4000,
@@ -58,6 +60,7 @@ const PLANES = [
 	{
 		"id": "a338",
 		"name": "Airbus A330-800neo",
+		"registration": "C-XXXX",
 		"cost": 300000000,
 		"capacity": 280,
 		"maxRange": 8150,
@@ -77,6 +80,7 @@ const PLANES = [
 	{
 		"id": "a359",
 		"name": "Airbus A350-1000ULR",
+		"registration": "C-XXXX",
 		"cost": 380000000,
 		"capacity": 400,
 		"maxRange": 9700,
@@ -227,6 +231,8 @@ var file
 
 var save_file = {}
 
+var used_registrations = ["C-GHDF"]
+
 const BASE_SAVE_FILE = {
 			"planes": [PLANES[0]],
 			"airports": AIRPORTS
@@ -234,7 +240,8 @@ const BASE_SAVE_FILE = {
 
 func _ready():
 	if not FileAccess.file_exists("user://airfleet.save"):
-		save_file = BASE_SAVE_FILE
+		save_file = BASE_SAVE_FILE.duplicate(true)
+		save_file.planes[0].registration = "C-GHDF"
 		save(save_file)
 	else:
 		load_save()
@@ -254,3 +261,20 @@ func load_save():
 		var content = file.get_as_text()
 		file.close()
 		save_file = JSON.parse_string(content)
+
+func generate_registration():
+	var reg = "C-"
+	while true:
+		for i in range(4):
+			reg += char(randi_range(65,90))
+		for registration in used_registrations:
+			if registration == reg:
+				reg = "C-"
+		used_registrations.append(reg)
+		return reg
+
+func get_distance(route) -> int:
+	var destination = AIRPORTS[route[1]]
+	var distance = destination.distance[route[0]]
+	return distance
+	

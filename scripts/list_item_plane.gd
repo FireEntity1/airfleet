@@ -14,5 +14,7 @@ func _ready():
 	$range.text = "RANGE: " + str(plane.maxRange)
 
 func _on_buy_button_up():
-	Global.save_file.planes.append(plane)
+	var plane_instance = plane.duplicate(true)
+	plane_instance.registration = Global.generate_registration()
+	Global.save_file.planes.append(plane_instance)
 	Global.save(Global.save_file)

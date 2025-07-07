@@ -18,6 +18,7 @@ func _ready():
 			possible_routes.append(airport.code)
 	for item in possible_routes:
 		$to.add_item(item)
+	update(Global.save_file.airports[from], Global.save_file.airports[to])
 
 func _process(delta):
 	pass
@@ -42,10 +43,24 @@ func _on_to_item_selected(index):
 			print("From: " + Global.save_file.airports[from].name + " To: " + airport.name)
 			update(Global.save_file.airports[from], airport)
 
-func get_planes(route):
-	var plane_list = Global.save_file.planes
+func get_planes(route: Array, plane_list: Array):
+	var available_planes = {
+		"checked": [],
+		"unchecked": [],
+		"other_route": [],
+		"grounded": [],
+	}
 	for plane in plane_list:
-		pass
+		if plane.status != "grounded" and plane.route == route:
+			available_planes.checked.append(plane)
+		elif plane.status != "grounded" and plane.route[0] == "XXX":
+			available_planes.unchecked.append(plane)
+		elif plane.status != "grounded" and plane.route != route:
+			available_planes.other_route.append(plane)
+		elif plane.status == "grounded":
+			available_planes.grounded.append(plane)
+		
+	return available_planes
 
 func update(origin,destination):
 	var distance = 0
@@ -53,5 +68,29 @@ func update(origin,destination):
 	distance = destination.distance[origin.code]
 	$distance.text = "Distance: " + str(distance) + "NMi"
 	for plane in Global.save_file.planes:
-		if distance < plane.max_range:
-			pass
+		if distance < plane.maxRange:
+			planes_available.append(plane)
+	var planes_sorted = get_planes([origin,destination], planes_available)
+	
+	print()
+	
+	print(str(planes_sorted))
+	
+	for child in $scroll/planes/checked.get_children():
+		$scroll/planes/checked.remove_child(child)
+		child.queue_free()
+	
+	for child in $scroll/planes/unchecked.get_children():
+		$scroll/planes/unchecked.remove_child(child)
+		child.queue_free()
+	
+	for plane in planes_sorted.checked:
+		var item = CheckBox.new()
+		item.text = plane.registration + ", " + plane.id
+		item.button_pressed = true
+		$scroll/planes/checked.add_child(item)
+	for plane in planes_sorted.unchecked:
+		var item = CheckBox.new()
+		item.text = plane.registration + ", " + plane.id
+		item.button_pressed = false
+		$scroll/planes/unchecked.add_child(item)

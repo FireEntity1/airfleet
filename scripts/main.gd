@@ -11,7 +11,15 @@ func _ready():
 		$tabs/shop/planes.add_child(scene)
 
 func _process(delta):
-	pass
+	for plane in Global.save_file.planes:
+		if plane.status == "onground" and plane.route[0] != "XXX":
+			fly(plane)
+			
 
 func _on_reset_button_up():
 	Global.save(Global.BASE_SAVE_FILE)
+
+func fly(plane: Dictionary):
+	var distance = Global.get_distance(plane.route)
+	var time_secs = (distance/plane.speed)/60
+	print(time_secs)
