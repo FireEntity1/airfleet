@@ -42,11 +42,13 @@ func _on_from_item_selected(index):
 func _on_to_item_selected(index):
 	var code = possible_routes[index]
 	var airport = {}
-	for airport_test in Global.save_file.airports:
-		if airport_test.code == code:
-			airport = airport_test
-			print("From: " + Global.save_file.airports[from].name + " To: " + airport.name)
-			update(Global.save_file.airports[from], airport)
+	for i in Global.save_file.airports.size():
+		if Global.save_file.airports[i].code == code:
+			to = i
+			airport = Global.save_file.airports[i]
+			break
+	print("From: " + Global.save_file.airports[from].name + " To: " + airport.name)
+	update(Global.save_file.airports[from], airport)
 
 func get_planes(route: Array, plane_list: Array):
 	var available_planes = {
@@ -70,7 +72,7 @@ func get_planes(route: Array, plane_list: Array):
 
 func update(origin,destination):
 	var distance = 0
-	var route = [origin, destination]
+	var route = [origin.code, destination.code]
 	var planes_available = []
 	distance = destination.distance[origin.code]
 	$distance.text = "Distance: " + str(distance) + "NMi"
@@ -113,7 +115,7 @@ func update(origin,destination):
 		
 		plane_checkboxes.append(checkbox)
 		plane_data_refs.append(plane)
-		
+	
 	for plane in planes_sorted.other_route:
 		var checkbox = CheckBox.new()
 		checkbox.text = "X - " + plane.registration + ", " + plane.id
@@ -138,4 +140,5 @@ func _on_plane_checkbox_toggled(pressed, checkbox):
 				plane.route = ["XXX", "XXX"]
 				print("Unassigned", plane.registration)
 				break
+	update(Global.save_file.airports[from], Global.save_file.airports[to])
 	Global.save(Global.save_file)

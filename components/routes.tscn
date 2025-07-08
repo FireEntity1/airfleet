@@ -56,11 +56,33 @@ offset_bottom = 1049.0
 [node name="planes" type="VBoxContainer" parent="scroll"]
 layout_mode = 2
 
+[node name="divider1" type="VBoxContainer" parent="scroll/planes"]
+layout_mode = 2
+
+[node name="text" type="Label" parent="scroll/planes/divider1"]
+layout_mode = 2
+text = "Available"
+
+[node name="line" type="Line2D" parent="scroll/planes/divider1"]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+
 [node name="checked" type="VBoxContainer" parent="scroll/planes"]
 layout_mode = 2
 
 [node name="unchecked" type="VBoxContainer" parent="scroll/planes"]
 layout_mode = 2
+
+[node name="divider2" type="VBoxContainer" parent="scroll/planes"]
+layout_mode = 2
+
+[node name="line" type="Line2D" parent="scroll/planes/divider2"]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+
+[node name="text" type="Label" parent="scroll/planes/divider2"]
+layout_mode = 2
+text = "Other Routes"
 
 [node name="other_route" type="VBoxContainer" parent="scroll/planes"]
 layout_mode = 2
