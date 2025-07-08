@@ -273,8 +273,11 @@ func generate_registration():
 		used_registrations.append(reg)
 		return reg
 
-func get_distance(route) -> int:
-	var destination = AIRPORTS[route[1]]
+func get_distance(route: Array) -> int:
+	var destination
+	for airport in save_file.airports:
+		if airport.code == route[1]:
+			destination = airport
 	var distance = destination.distance[route[0]]
 	return distance
 	

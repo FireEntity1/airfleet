@@ -3,6 +3,11 @@ extends Control
 var from = 0
 var to = 1
 
+var route = ["XXX", "XXX"]
+
+var plane_checkboxes: Array
+var plane_data_refs: Array
+
 var possible_routes
 
 func _ready():
@@ -51,6 +56,7 @@ func get_planes(route: Array, plane_list: Array):
 		"grounded": [],
 	}
 	for plane in plane_list:
+		#print(route)
 		if plane.status != "grounded" and plane.route == route:
 			available_planes.checked.append(plane)
 		elif plane.status != "grounded" and plane.route[0] == "XXX":
@@ -64,17 +70,14 @@ func get_planes(route: Array, plane_list: Array):
 
 func update(origin,destination):
 	var distance = 0
+	var route = [origin, destination]
 	var planes_available = []
 	distance = destination.distance[origin.code]
 	$distance.text = "Distance: " + str(distance) + "NMi"
 	for plane in Global.save_file.planes:
 		if distance < plane.maxRange:
 			planes_available.append(plane)
-	var planes_sorted = get_planes([origin,destination], planes_available)
-	
-	print()
-	
-	print(str(planes_sorted))
+	var planes_sorted = get_planes([origin.code,destination.code], planes_available)
 	
 	for child in $scroll/planes/checked.get_children():
 		$scroll/planes/checked.remove_child(child)
@@ -83,14 +86,56 @@ func update(origin,destination):
 	for child in $scroll/planes/unchecked.get_children():
 		$scroll/planes/unchecked.remove_child(child)
 		child.queue_free()
+		
+	for child in $scroll/planes/other_route.get_children():
+		$scroll/planes/other_route.remove_child(child)
+		child.queue_free()
 	
-	for plane in planes_sorted.checked:
-		var item = CheckBox.new()
-		item.text = plane.registration + ", " + plane.id
-		item.button_pressed = true
-		$scroll/planes/checked.add_child(item)
+	plane_checkboxes.clear()
+	plane_data_refs.clear()
+
 	for plane in planes_sorted.unchecked:
-		var item = CheckBox.new()
-		item.text = plane.registration + ", " + plane.id
-		item.button_pressed = false
-		$scroll/planes/unchecked.add_child(item)
+		var checkbox = CheckBox.new()
+		checkbox.text = plane.registration + ", " + plane.id
+		checkbox.button_pressed = false
+		checkbox.connect("toggled", Callable(self, "_on_plane_checkbox_toggled").bind(checkbox))
+		$scroll/planes/unchecked.add_child(checkbox)
+
+		plane_checkboxes.append(checkbox)
+		plane_data_refs.append(plane)
+		
+	for plane in planes_sorted.checked:
+		var checkbox = CheckBox.new()
+		checkbox.text = plane.registration + ", " + plane.id
+		checkbox.button_pressed = true
+		checkbox.connect("toggled", Callable(self, "_on_plane_checkbox_toggled").bind(checkbox))
+		$scroll/planes/checked.add_child(checkbox)
+		
+		plane_checkboxes.append(checkbox)
+		plane_data_refs.append(plane)
+		
+	for plane in planes_sorted.other_route:
+		var checkbox = CheckBox.new()
+		checkbox.text = "X - " + plane.registration + ", " + plane.id
+		checkbox.button_pressed = false
+		checkbox.connect("toggled", Callable(self, "_on_plane_checkbox_toggled").bind(checkbox))
+		$scroll/planes/other_route.add_child(checkbox)
+		
+		plane_checkboxes.append(checkbox)
+		plane_data_refs.append(plane)
+
+func _on_plane_checkbox_toggled(pressed, checkbox):
+	var index = plane_checkboxes.find(checkbox)
+	var toggled_plane = plane_data_refs[index]
+	for plane in Global.save_file.planes:
+		if plane.registration == toggled_plane.registration:
+			if pressed:
+				plane.route = [Global.save_file.airports[from].code, Global.save_file.airports[to].code]
+				print(plane.route)
+				print("Assigned", plane.registration, "to", plane.route)
+				
+			else:
+				plane.route = ["XXX", "XXX"]
+				print("Unassigned", plane.registration)
+				break
+	Global.save(Global.save_file)
