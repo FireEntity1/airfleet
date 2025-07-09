@@ -145,7 +145,6 @@ func _on_plane_checkbox_toggled(pressed, checkbox):
 				plane.route = [Global.save_file.airports[from].code, Global.save_file.airports[to].code]
 				print(plane.route)
 				print("Assigned", plane.registration, "to", plane.route)
-				
 			else:
 				plane.route = ["XXX", "XXX"]
 				print("Unassigned", plane.registration)

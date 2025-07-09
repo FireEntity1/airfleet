@@ -26,6 +26,7 @@ func _on_reset_button_up():
 func fly(plane: Dictionary):
 	var distance = Global.get_distance(plane.route)
 	var time_secs = (distance/plane.speed)
+	var money = Global.calculate_payout(plane)
 	for plane_save in Global.save_file.planes:
 		if plane.registration == plane_save.registration:
 			plane_save.status = "flying"
@@ -40,6 +41,9 @@ func fly(plane: Dictionary):
 			Global.save(Global.save_file)
 			break
 	print(plane.registration + " has landed from route: " + plane.route[0] + " to " + plane.route[1])
+	Global.save_file.money += money
+	Global.save(Global.save_file)
+	print(money)
 
 func _on_update_timeout():
 	for child in $tabs/Flying/container.get_children():
