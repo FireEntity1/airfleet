@@ -231,18 +231,17 @@ var file
 
 var save_file = {}
 
-var used_registrations = ["C-GHDF"]
-
-const BASE_SAVE_FILE = {
-			"planes": [PLANES[0]],
-			"airports": AIRPORTS,
-			"money": 1000000,
-		}
+var used_registrations = ["C-XXXX"]
 
 func _ready():
 	if not FileAccess.file_exists("user://airfleet.save"):
-		save_file = BASE_SAVE_FILE.duplicate(true)
-		save_file.planes[0].registration = "C-GHDF"
+		save_file = {
+			"planes": [PLANES[0].duplicate(true), PLANES[1].duplicate(true)],
+			"airports": AIRPORTS,
+			"money": 1000000,
+		}
+		for plane in save_file.planes:
+			plane.registration = generate_registration()
 		save(save_file)
 	else:
 		load_save()
@@ -281,10 +280,9 @@ func get_distance(route: Array) -> int:
 			destination = airport
 	var distance = destination.distance[route[0]]
 	return distance
-	
 
 func calculate_payout(plane: Dictionary):
 	var pax = int(plane.capacity*randf_range(0.7,1.0))
 	var distance = get_distance(plane.route)
-	var per_pax = 100 + (distance/10)
+	var per_pax = 100 + (distance/2)
 	return pax * per_pax
