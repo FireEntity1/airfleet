@@ -235,7 +235,8 @@ var used_registrations = ["C-GHDF"]
 
 const BASE_SAVE_FILE = {
 			"planes": [PLANES[0]],
-			"airports": AIRPORTS
+			"airports": AIRPORTS,
+			"money": 1000000,
 		}
 
 func _ready():
@@ -281,3 +282,9 @@ func get_distance(route: Array) -> int:
 	var distance = destination.distance[route[0]]
 	return distance
 	
+
+func calculate_payout(plane: Dictionary):
+	var pax = int(plane.capacity*randf_range(0.7,1.0))
+	var distance = get_distance(plane.route)
+	var per_pax = 100 + (distance/10)
+	return pax * per_pax

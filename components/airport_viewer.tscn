@@ -27,12 +27,13 @@ offset_bottom = 39.0
 
 [node name="code" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1536.0
+offset_left = 1509.0
 offset_top = 6.0
-offset_right = 1876.0
+offset_right = 1891.0
 offset_bottom = 255.0
 theme_override_font_sizes/font_size = 182
 text = "XXX"
+horizontal_alignment = 1
 
 [node name="name" type="Label" parent="."]
 layout_mode = 0
@@ -41,7 +42,7 @@ offset_top = 30.0
 offset_right = 1466.0
 offset_bottom = 118.0
 theme_override_font_sizes/font_size = 64
-text = "XXX"
+text = "XXX Int'l Airport"
 horizontal_alignment = 1
 
 [node name="lounge" type="Button" parent="."]

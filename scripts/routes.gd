@@ -98,7 +98,7 @@ func update(origin,destination):
 
 	for plane in planes_sorted.unchecked:
 		var checkbox = CheckBox.new()
-		checkbox.text = plane.registration + ", " + plane.id
+		checkbox.text = plane.registration + ", " + plane.name
 		checkbox.button_pressed = false
 		checkbox.connect("toggled", Callable(self, "_on_plane_checkbox_toggled").bind(checkbox))
 		$scroll/planes/unchecked.add_child(checkbox)
@@ -108,7 +108,7 @@ func update(origin,destination):
 		
 	for plane in planes_sorted.checked:
 		var checkbox = CheckBox.new()
-		checkbox.text = plane.registration + ", " + plane.id
+		checkbox.text = plane.registration + ", " + plane.name
 		checkbox.button_pressed = true
 		checkbox.connect("toggled", Callable(self, "_on_plane_checkbox_toggled").bind(checkbox))
 		$scroll/planes/checked.add_child(checkbox)
@@ -118,10 +118,20 @@ func update(origin,destination):
 	
 	for plane in planes_sorted.other_route:
 		var checkbox = CheckBox.new()
-		checkbox.text = "X - " + plane.registration + ", " + plane.id
+		checkbox.text = "[" + plane.route[0] + " - " + plane.route[1] + "] " + plane.registration + ", " + plane.name
 		checkbox.button_pressed = false
 		checkbox.connect("toggled", Callable(self, "_on_plane_checkbox_toggled").bind(checkbox))
 		$scroll/planes/other_route.add_child(checkbox)
+		
+		plane_checkboxes.append(checkbox)
+		plane_data_refs.append(plane)
+	
+	for plane in planes_sorted.grounded:
+		var checkbox = CheckBox.new()
+		checkbox.text = plane.registration + ", " + plane.name
+		checkbox.button_pressed = false
+		checkbox.disabled = true
+		$scroll/planes/grounded.add_child(checkbox)
 		
 		plane_checkboxes.append(checkbox)
 		plane_data_refs.append(plane)
