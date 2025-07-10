@@ -1,0 +1,15 @@
+# https://github.com/iamawatermelo/wakapi-anyide v0.6.8
+
+[meta]
+version = 1
+watchers = ['files']
+
+[files]
+include = ["/audio"]
+exclude = ["*.new", "*.bak", "*.ogg", "*.mp3", "*.wav", ".DS_Store"]
+exclude_files = [".gitignore"]
+exclude_binary_files = true
+language_mapping = {".mmp" = "LMMS Project"}
+
+[project]
+name = "Airfleet Music"  # your project name

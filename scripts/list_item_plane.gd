@@ -15,6 +15,9 @@ func _ready():
 
 func _on_buy_button_up():
 	var plane_instance = plane.duplicate(true)
-	plane_instance.registration = Global.generate_registration()
-	Global.save_file.planes.append(plane_instance)
-	Global.save(Global.save_file)
+	var cost = plane.cost
+	if Global.save_file.money >= cost:
+		Global.save_file.money -= cost
+		plane_instance.registration = Global.generate_registration()
+		Global.save_file.planes.append(plane_instance)
+		Global.save(Global.save_file)

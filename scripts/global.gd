@@ -114,7 +114,7 @@ const AIRPORTS = [
 		"code": "YVR",
 		"name": "Vancouver Int'l",
 		"type": "domestic",
-		"fee": 10000,
+		"fee": 1000,
 		"demand": { "intl": 1.0, "dom": 1.0 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": ["YVR-YYC"],
@@ -125,7 +125,7 @@ const AIRPORTS = [
 		"code": "YYZ",
 		"name": "Toronto Pearson Int'l",
 		"type": "domestic",
-		"fee": 20000,
+		"fee": 5000,
 		"demand": { "intl": 1.1, "dom": 1.0 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -136,7 +136,7 @@ const AIRPORTS = [
 		"code": "SFO",
 		"name": "San Francisco Int'l",
 		"type": "international",
-		"fee": 30000,
+		"fee": 15000,
 		"demand": { "intl": 1.2, "dom": 0.9 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -147,7 +147,7 @@ const AIRPORTS = [
 		"code": "LAX",
 		"name": "Los Angeles Int'l",
 		"type": "international",
-		"fee": 50000,
+		"fee": 30000,
 		"demand": { "intl": 1.4, "dom": 1 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -158,7 +158,7 @@ const AIRPORTS = [
 		"code": "JFK",
 		"name": "John F. Kennedy Int'l",
 		"type": "international",
-		"fee": 80000,
+		"fee": 50000,
 		"demand": { "intl": 1.5, "dom": 1.2 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -169,7 +169,7 @@ const AIRPORTS = [
 		"code": "MEX",
 		"name": "Mexico City Int'l",
 		"type": "international",
-		"fee": 80000,
+		"fee": 50000,
 		"demand": { "intl": 1.5, "dom": 1 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -180,7 +180,7 @@ const AIRPORTS = [
 		"code": "LHR",
 		"name": "London Heathrow",
 		"type": "international",
-		"fee": 140000,
+		"fee": 40000,
 		"demand": { "intl": 1.6, "dom": 1 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -191,7 +191,7 @@ const AIRPORTS = [
 		"code": "ZRH",
 		"name": "Zürich Int'l",
 		"type": "international",
-		"fee": 100000,
+		"fee": 30000,
 		"demand": { "intl": 1.6, "dom": 1 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -202,7 +202,7 @@ const AIRPORTS = [
 		"code": "FRA",
 		"name": "Frankfurt Int'l",
 		"type": "international",
-		"fee": 120000,
+		"fee": 40000,
 		"demand": { "intl": 1.6, "dom": 1 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -213,7 +213,7 @@ const AIRPORTS = [
 		"code": "SIN",
 		"name": "Singapore Int'l",
 		"type": "international",
-		"fee": 140000,
+		"fee": 50000,
 		"demand": { "intl": 1.7, "dom": 1 },
 		"upgrades": { "lounge": false, "eco_fuel": false, "jetbridges": false },
 		"connected_routes": [],
@@ -239,6 +239,7 @@ func _ready():
 			"planes": [PLANES[0].duplicate(true), PLANES[1].duplicate(true)],
 			"airports": AIRPORTS,
 			"money": 1000000,
+			"total_profit": 1000000
 		}
 		for plane in save_file.planes:
 			plane.registration = generate_registration()
@@ -285,4 +286,29 @@ func calculate_payout(plane: Dictionary):
 	var pax = int(plane.capacity*randf_range(0.7,1.0))
 	var distance = get_distance(plane.route)
 	var per_pax = 100 + (distance/2)
+	var subtotal = pax * per_pax
+	var mult = 1.0
+	var airport = {}
+	for _airport in save_file.airports:
+		if _airport.code == plane.route[1]:
+			airport = _airport
+			break
+	var fee = airport.fee
+	if airport.upgrades.lounge:
+		mult += 0.2
+	if airport.upgrades.jetbridges:
+		mult += 0.1
+	if airport.upgrades.eco_fuel:
+		fee = fee/2
+	return (subtotal * mult) - fee
+		
 	return pax * per_pax
+
+func add_money(money: int):
+	save_file.money += money
+	#save_file.total_profit += money
+	save(save_file)
+
+func remove_money(cost: int):
+	save_file.money -= cost
+	save(save_file)

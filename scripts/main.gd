@@ -19,7 +19,7 @@ func _process(delta):
 			fly(plane)
 
 func _on_reset_button_up():
-	Global.save(Global.BASE_SAVE_FILE)
+	DirAccess.remove_absolute("user://airfleet.save")
 	get_tree().reload_current_scene()
 	Global.load_save()
 
@@ -41,7 +41,7 @@ func fly(plane: Dictionary):
 			Global.save(Global.save_file)
 			break
 	print(plane.registration + " has landed from route: " + plane.route[0] + " to " + plane.route[1])
-	Global.save_file.money += money
+	Global.add_money(money)
 	Global.save(Global.save_file)
 	print(money)
 
@@ -54,3 +54,4 @@ func _on_update_timeout():
 			label.text = plane.registration + " is " + plane.status
 			$tabs/Flying/container.add_child(label)
 	$money.text = "$" + str(Global.save_file.money)
+	
