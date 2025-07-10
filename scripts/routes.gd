@@ -38,8 +38,12 @@ func _on_from_item_selected(index):
 			possible_routes.append(airport.code)
 	for item in possible_routes:
 		$to.add_item(item)
-
+	$to.select(0)
+	_on_to_item_selected(0)
 func _on_to_item_selected(index):
+	if possible_routes[index] == Global.save_file.airports[from].code:
+		$to.select(0)
+		return
 	var code = possible_routes[index]
 	var airport = {}
 	for i in Global.save_file.airports.size():
@@ -59,7 +63,7 @@ func get_planes(route: Array, plane_list: Array):
 	}
 	for plane in plane_list:
 		#print(route)
-		if plane.status != "grounded" and plane.route == route:
+		if plane.status != "grounded" and plane.route == route or plane.status != "grounded" and plane.route[0] == route[1] and plane.route[1] == route[0]:
 			available_planes.checked.append(plane)
 		elif plane.status != "grounded" and plane.route[0] == "XXX":
 			available_planes.unchecked.append(plane)
@@ -135,6 +139,18 @@ func update(origin,destination):
 		
 		plane_checkboxes.append(checkbox)
 		plane_data_refs.append(plane)
+	
+	for airport in Global.save_file.airports:
+		airport["slots_used"] = 0
+	
+	for plane in Global.save_file.planes:
+		if plane.route == route:
+			for airport in Global.save_file.airports:
+				if airport.code == route[1]:
+					airport.slots_used += 1
+	
+	for airport in Global.save_file.airports:
+		print(airport.slots_used)
 
 func _on_plane_checkbox_toggled(pressed, checkbox):
 	var index = plane_checkboxes.find(checkbox)

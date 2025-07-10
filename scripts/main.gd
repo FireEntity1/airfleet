@@ -53,5 +53,13 @@ func _on_update_timeout():
 			var label = Label.new()
 			label.text = plane.registration + " is " + plane.status
 			$tabs/Flying/container.add_child(label)
-	$money.text = "$" + str(Global.save_file.money)
+	$money.text = "$" + split_num(Global.save_file.money)
 	
+func split_num(number: int):
+	var num = str(number)
+	var count = 0
+	for i in range(num.length() - 1, -1, -1):
+		count += 1
+		if count % 3 == 0 and i != 0:
+			num = num.insert(i, ",")
+	return num

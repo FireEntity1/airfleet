@@ -109,6 +109,7 @@ const AIRPORTS = [
 		"connected_routes": [["YYC", "YVR"]],
 		"unlocked": true,
 		"distance": { "YYC": 0, "YVR": 540, "YYZ": 1700 },
+		"slots_used": 1,
 	},
 	{
 		"code": "YVR",
@@ -120,6 +121,7 @@ const AIRPORTS = [
 		"connected_routes": ["YVR-YYC"],
 		"unlocked": true,
 		"distance": { "YYC": 540, "YVR": 0, "YYZ": 2100 },
+		"slots_used": 1,
 	},
 	{
 		"code": "YYZ",
@@ -131,6 +133,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 1700, "YVR": 2100, "YYZ": 0 },
+		"slots_used": 0,
 	},
 	{
 		"code": "SFO",
@@ -142,6 +145,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 1100, "YVR": 900, "YYZ": 2200 },
+		"slots_used": 0,
 	},
 	{
 		"code": "LAX",
@@ -153,6 +157,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 1200, "YVR": 1100, "YYZ": 2300 },
+		"slots_used": 0,
 	},
 	{
 		"code": "JFK",
@@ -164,6 +169,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 2100, "YVR": 2500, "YYZ": 400 },
+		"slots_used": 0,
 	},
 	{
 		"code": "MEX",
@@ -175,6 +181,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 2500, "YVR": 2300, "YYZ": 2100 },
+		"slots_used": 0,
 	},
 	{
 		"code": "LHR",
@@ -186,6 +193,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 3800, "YVR": 4400, "YYZ": 3600 },
+		"slots_used": 0,
 	},
 	{
 		"code": "ZRH",
@@ -197,6 +205,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 4100, "YVR": 4700, "YYZ": 3900 },
+		"slots_used": 0,
 	},
 	{
 		"code": "FRA",
@@ -208,6 +217,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 4000, "YVR": 4600, "YYZ": 3800 },
+		"slots_used": 0,
 	},
 	{
 		"code": "SIN",
@@ -219,6 +229,7 @@ const AIRPORTS = [
 		"connected_routes": [],
 		"unlocked": false,
 		"distance": { "YYC": 7100, "YVR": 7700, "YYZ": 8200 },
+		"slots_used": 0,
 	},
 ]
 
@@ -237,7 +248,7 @@ func _ready():
 	if not FileAccess.file_exists("user://airfleet.save"):
 		save_file = {
 			"planes": [PLANES[0].duplicate(true), PLANES[1].duplicate(true)],
-			"airports": AIRPORTS,
+			"airports": AIRPORTS.duplicate(true),
 			"money": 1000000,
 			"total_profit": 1000000
 		}
@@ -246,9 +257,6 @@ func _ready():
 		save(save_file)
 	else:
 		load_save()
-
-func _process(delta):
-	pass
 
 func save(data):
 	var json = JSON.stringify(data)
@@ -293,6 +301,9 @@ func calculate_payout(plane: Dictionary):
 		if _airport.code == plane.route[1]:
 			airport = _airport
 			break
+	var slots = airport.slots_used
+	if slots > 5:
+		mult -= ((slots-5)+0.1)
 	var fee = airport.fee
 	if airport.upgrades.lounge:
 		mult += 0.2
@@ -300,9 +311,8 @@ func calculate_payout(plane: Dictionary):
 		mult += 0.1
 	if airport.upgrades.eco_fuel:
 		fee = fee/2
-	return (subtotal * mult) - fee
-		
-	return pax * per_pax
+	subtotal = (subtotal * mult) - fee
+	return subtotal
 
 func add_money(money: int):
 	save_file.money += money
