@@ -76,26 +76,10 @@ offset_right = 859.0
 offset_bottom = 1078.0
 text = "$"
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
-title = "Event!"
-initial_position = 2
-size = Vector2i(450, 300)
-visible = true
-
-[node name="container" type="BoxContainer" parent="PopupPanel"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 450.0
-offset_bottom = 300.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="message" type="Label" parent="PopupPanel/container"]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("1_d0r42")
-text = "sdfg"
+[node name="event" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
 
 [connection signal="button_up" from="tabs/RESET/reset" to="." method="_on_reset_button_up"]
 [connection signal="timeout" from="update" to="." method="_on_update_timeout"]
+[connection signal="timeout" from="event" to="." method="_on_event_timeout"]

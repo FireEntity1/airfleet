@@ -62,3 +62,15 @@ func split_num(number: int):
 		if count % 3 == 0 and i != 0:
 			num = num.insert(i, ",")
 	return num
+
+func _on_event_timeout():
+	if not Global.save_file.initial_completed:
+		var event = Global.trigger_event("domestic_boom")
+		if event != null:
+			var window = preload("res://components/popup.tscn").instantiate()
+			print(event)
+			window.title = event.name
+			window.description = event.description
+			add_child(window)
+		$event.wait_time = randi_range(45,85)
+		

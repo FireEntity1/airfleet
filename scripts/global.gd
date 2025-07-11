@@ -38,7 +38,7 @@ const PLANES = [
 	},
 	
 	{
-		"id": "bsc3",
+		"id": "bcs3",
 		"name": "Airbus A220",
 		"registration": "C-XXXX",
 		"cost": 90000000,
@@ -244,8 +244,17 @@ var save_file = {}
 
 const EVENTS = [
 	{
-		"name": "",
-	}
+		"name": "Secondhand Aircraft for Sale",
+		"id": "plane_sale",
+		"description": "An airline is selling one of its aircraft! Would you like to purchase it?",
+		"outcomes": ["Purchase", "No"]
+	},
+	{
+		"name": "Domestic Tourism Boom!",
+		"id": "domestic_boom",
+		"description": "ALl domestic flights between YVR, YYC, and YYZ have increased demand",
+		"outcomes": ["Ok"]
+	},
 ]
 
 var used_registrations = ["C-XXXX"]
@@ -256,10 +265,16 @@ func _ready():
 			"planes": [PLANES[0].duplicate(true), PLANES[1].duplicate(true)],
 			"airports": AIRPORTS.duplicate(true),
 			"money": 1000000,
-			"total_profit": 1000000
+			"total_profit": 1000000,
+			"initial_completed": false,
 		}
+		
 		for plane in save_file.planes:
 			plane.registration = generate_registration()
+			if plane.id == "dhc4":
+				plane.route = ["YYC", "YVR"]
+			elif plane.id == "bcs3":
+				plane.route = ["YYC", "YYZ"]
 		save(save_file)
 	else:
 		load_save()
@@ -330,3 +345,11 @@ func add_money(money: int):
 func remove_money(cost: int):
 	save_file.money -= cost
 	save(save_file)
+
+func trigger_event(id):
+	var event_data = null
+	for event in EVENTS:
+		if event.id == id:
+			event_data = event
+			break
+	return event_data
