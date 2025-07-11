@@ -242,6 +242,12 @@ var file
 
 var save_file = {}
 
+const EVENTS = [
+	{
+		"name": "",
+	}
+]
+
 var used_registrations = ["C-XXXX"]
 
 func _ready():
@@ -304,6 +310,7 @@ func calculate_payout(plane: Dictionary):
 	var slots = airport.slots_used
 	if slots > 5:
 		mult -= ((slots-5)+0.1)
+		mult = clamp(mult,0.5,999)
 	var fee = airport.fee
 	if airport.upgrades.lounge:
 		mult += 0.2
@@ -312,6 +319,7 @@ func calculate_payout(plane: Dictionary):
 	if airport.upgrades.eco_fuel:
 		fee = fee/2
 	subtotal = (subtotal * mult) - fee
+	print(plane.id + ", $" + str(subtotal))
 	return subtotal
 
 func add_money(money: int):

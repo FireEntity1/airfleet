@@ -143,11 +143,15 @@ func update(origin,destination):
 	for airport in Global.save_file.airports:
 		airport["slots_used"] = 0
 	
-	for plane in Global.save_file.planes:
-		if plane.route == route:
-			for airport in Global.save_file.airports:
+	var slots_used = 0
+	
+	for airport in Global.save_file.airports:
+		for plane in Global.save_file.planes:
+			if plane.route[1] == airport.code:
+				airport.slots_used += 1
 				if airport.code == route[1]:
-					airport.slots_used += 1
+					slots_used += 1
+	$slots.text = "Slots Used at " + route[1] + ": " + str(slots_used)
 	
 	for airport in Global.save_file.airports:
 		print(airport.slots_used)

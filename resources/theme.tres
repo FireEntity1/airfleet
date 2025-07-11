@@ -1,7 +1,11 @@
-[gd_resource type="Theme" format=3 uid="uid://pu68ght6npmo"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://pu68ght6npmo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sv0p"]
+bg_color = Color(0, 0, 0, 1)
 
 [resource]
 default_font_size = 24
 Label/font_sizes/font_size = 32
 OptionButton/font_sizes/font_size = 32
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_2sv0p")
 TabBar/font_sizes/font_size = 64

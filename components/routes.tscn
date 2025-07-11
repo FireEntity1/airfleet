@@ -90,5 +90,12 @@ layout_mode = 2
 [node name="grounded" type="VBoxContainer" parent="scroll/planes"]
 layout_mode = 2
 
+[node name="slots" type="Label" parent="."]
+layout_mode = 0
+offset_top = 249.0
+offset_right = 286.0
+offset_bottom = 294.0
+text = "Slots"
+
 [connection signal="item_selected" from="from" to="." method="_on_from_item_selected"]
 [connection signal="item_selected" from="to" to="." method="_on_to_item_selected"]
