@@ -69,8 +69,9 @@ func _on_event_timeout():
 		if event != null:
 			var window = preload("res://components/popup.tscn").instantiate()
 			print(event)
+			window.id = event.id
 			window.title = event.name
 			window.description = event.description
+			window.options = event.outcomes
 			add_child(window)
 		$event.wait_time = randi_range(45,85)
-		

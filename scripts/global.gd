@@ -267,6 +267,7 @@ func _ready():
 			"money": 1000000,
 			"total_profit": 1000000,
 			"initial_completed": false,
+			"active_events": []
 		}
 		
 		for plane in save_file.planes:
