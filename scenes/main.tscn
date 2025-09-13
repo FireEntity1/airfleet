@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://be4rthtttntlh"]
 
 [ext_resource type="Theme" uid="uid://pu68ght6npmo" path="res://resources/theme.tres" id="1_d0r42"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_q8sg7"]
+[ext_resource type="Script" uid="uid://bt6jujtu73u8s" path="res://scripts/main.gd" id="1_q8sg7"]
 [ext_resource type="PackedScene" uid="uid://chwdp2b5qn7lw" path="res://components/airport_viewer.tscn" id="3_boyyf"]
 [ext_resource type="PackedScene" uid="uid://c1h51enobhpkj" path="res://components/routes.tscn" id="4_ligm2"]
 
