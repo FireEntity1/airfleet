@@ -45,13 +45,35 @@ func fly(plane: Dictionary):
 	Global.save(Global.save_file)
 
 func _on_update_timeout():
-	for child in $tabs/Flying/container.get_children():
-		$tabs/Flying/container.remove_child(child)
-		child.queue_free()
+	for child in $tabs/Flying/container/q400.get_children():
+		if child.name != "text" and child.name != "line":
+			$tabs/Flying/container/q400.remove_child(child)
+			child.queue_free()
+	for child in $tabs/Flying/container/q400.get_children():
+		if child.name != "text" and child.name != "line":
+			$tabs/Flying/container/a220.remove_child(child)
+			child.queue_free()
+	for child in $tabs/Flying/container/q400.get_children():
+		if child.name != "text" and child.name != "line":
+			$tabs/Flying/container/q400.remove_child(child)
+			child.queue_free()
+	for child in $tabs/Flying/container/q400.get_children():
+		if child.name != "text" and child.name != "line":
+			$tabs/Flying/container/q400.remove_child(child)
+			child.queue_free()
 	for plane in Global.save_file.planes:
 			var label = Label.new()
+			label.name = plane.registration
 			label.text = plane.registration + " is " + plane.status
-			$tabs/Flying/container.add_child(label)
+			match plane.id:
+				"dhc4":
+					$tabs/Flying/container/q400.add_child(label)
+				"bsc3":
+					$tabs/Flying/container/a220.add_child(label)
+				"a338":
+					$tabs/Flying/container/a338.add_child(label)
+				"a359":
+					$tabs/Flying/container/a350.add_child(label)
 	$money.text = "$" + split_num(Global.save_file.money)
 	
 func split_num(number: int):

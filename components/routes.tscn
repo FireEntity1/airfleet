@@ -63,6 +63,7 @@ layout_mode = 2
 
 [node name="text" type="Label" parent="scroll/planes/divider1"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 64
 text = "Available"
 
 [node name="line" type="Line2D" parent="scroll/planes/divider1"]
@@ -84,6 +85,7 @@ width = 2.0
 
 [node name="text" type="Label" parent="scroll/planes/divider2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 64
 text = "Other Routes"
 
 [node name="other_route" type="VBoxContainer" parent="scroll/planes"]

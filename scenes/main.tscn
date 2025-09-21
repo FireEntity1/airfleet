@@ -1,9 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://be4rthtttntlh"]
+[gd_scene load_steps=9 format=3 uid="uid://be4rthtttntlh"]
 
 [ext_resource type="Theme" uid="uid://pu68ght6npmo" path="res://resources/theme.tres" id="1_d0r42"]
 [ext_resource type="Script" uid="uid://bt6jujtu73u8s" path="res://scripts/main.gd" id="1_q8sg7"]
 [ext_resource type="PackedScene" uid="uid://chwdp2b5qn7lw" path="res://components/airport_viewer.tscn" id="3_boyyf"]
+[ext_resource type="Shader" uid="uid://banaa85u21ry4" path="res://resources/background.gdshader" id="3_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c1h51enobhpkj" path="res://components/routes.tscn" id="4_ligm2"]
+[ext_resource type="Shader" uid="uid://c5r802nrxu1lg" path="res://resources/blur.gdshader" id="4_tefeu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("3_tbgi4")
+shader_parameter/big_color = Color(0.45889, 0.626839, 0.814954, 1)
+shader_parameter/small_color = Color(0.554337, 0.436832, 0.653643, 1)
+shader_parameter/big_speed = 0.04
+shader_parameter/small_speed = 0.02
+shader_parameter/big_size = 1.256
+shader_parameter/small_size = 1.256
+shader_parameter/background_color = Color(0.590364, 0.550777, 0.54831, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6xl0"]
+shader = ExtResource("4_tefeu")
+shader_parameter/lod = 5.0
 
 [node name="main" type="Control"]
 layout_mode = 3
@@ -14,6 +30,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_d0r42")
 script = ExtResource("1_q8sg7")
+
+[node name="rect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tefeu")
+layout_mode = 0
+offset_top = -369.0
+offset_right = 1932.0
+offset_bottom = 1127.0
+color = Color(0, 0, 0, 1)
+
+[node name="blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_o6xl0")
+layout_mode = 0
+offset_top = -369.0
+offset_right = 1932.0
+offset_bottom = 1127.0
+color = Color(0, 0, 0, 1)
 
 [node name="tabs" type="TabContainer" parent="."]
 custom_minimum_size = Vector2(0, 1020)
@@ -34,6 +66,54 @@ metadata/_tab_index = 0
 [node name="container" type="VBoxContainer" parent="tabs/Flying"]
 custom_minimum_size = Vector2(1920, 200)
 layout_mode = 2
+
+[node name="q400" type="VBoxContainer" parent="tabs/Flying/container"]
+layout_mode = 2
+
+[node name="text" type="Label" parent="tabs/Flying/container/q400"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Dash 8-400"
+
+[node name="line" type="Line2D" parent="tabs/Flying/container/q400"]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+
+[node name="a220" type="VBoxContainer" parent="tabs/Flying/container"]
+layout_mode = 2
+
+[node name="line" type="Line2D" parent="tabs/Flying/container/a220"]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+
+[node name="text" type="Label" parent="tabs/Flying/container/a220"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "A220-300"
+
+[node name="a338" type="VBoxContainer" parent="tabs/Flying/container"]
+layout_mode = 2
+
+[node name="line" type="Line2D" parent="tabs/Flying/container/a338"]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+
+[node name="text" type="Label" parent="tabs/Flying/container/a338"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "A330-900neo"
+
+[node name="a350" type="VBoxContainer" parent="tabs/Flying/container"]
+layout_mode = 2
+
+[node name="line" type="Line2D" parent="tabs/Flying/container/a350"]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+
+[node name="text" type="Label" parent="tabs/Flying/container/a350"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "A350-900ULR"
 
 [node name="Shop" type="ScrollContainer" parent="tabs"]
 visible = false
@@ -78,7 +158,6 @@ text = "$"
 
 [node name="event" type="Timer" parent="."]
 wait_time = 8.0
-autostart = true
 
 [connection signal="button_up" from="tabs/RESET/reset" to="." method="_on_reset_button_up"]
 [connection signal="timeout" from="update" to="." method="_on_update_timeout"]

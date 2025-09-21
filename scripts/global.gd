@@ -292,6 +292,8 @@ func load_save():
 		var content = file.get_as_text()
 		file.close()
 		save_file = JSON.parse_string(content)
+	else:
+		reset()
 
 func generate_registration():
 	var reg = "C-"
@@ -354,3 +356,22 @@ func trigger_event(id):
 			event_data = event
 			break
 	return event_data
+
+func reset():
+	save_file = {
+			"planes": [PLANES[0].duplicate(true), PLANES[1].duplicate(true)],
+			"airports": AIRPORTS.duplicate(true),
+			"money": 1000000,
+			"total_profit": 1000000,
+			"initial_completed": false,
+			"active_events": []
+		}
+		
+	for plane in save_file.planes:
+		plane.registration = generate_registration()
+		if plane.id == "dhc4":
+			plane.route = ["YYC", "YVR"]
+		elif plane.id == "bcs3":
+			plane.route = ["YYC", "YYZ"]
+	save(save_file)
+	load_save()

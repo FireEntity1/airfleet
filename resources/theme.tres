@@ -1,11 +1,18 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://pu68ght6npmo"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://pu68ght6npmo"]
+
+[ext_resource type="FontFile" uid="uid://cchk67ksfg0yt" path="res://resources/tektur-font.ttf" id="1_d4nwg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sv0p"]
 bg_color = Color(0, 0, 0, 1)
 
 [resource]
 default_font_size = 24
+Button/fonts/font = ExtResource("1_d4nwg")
 Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_d4nwg")
 OptionButton/font_sizes/font_size = 32
+PopupPanel/fonts/title_font = ExtResource("1_d4nwg")
 PopupPanel/styles/panel = SubResource("StyleBoxFlat_2sv0p")
 TabBar/font_sizes/font_size = 64
+TabBar/fonts/font = ExtResource("1_d4nwg")
+TabContainer/fonts/font = ExtResource("1_d4nwg")
