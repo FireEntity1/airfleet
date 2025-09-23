@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1h51enobhpkj"]
+[gd_scene load_steps=5 format=3 uid="uid://c1h51enobhpkj"]
 
 [ext_resource type="Theme" uid="uid://pu68ght6npmo" path="res://resources/theme.tres" id="1_cxbdo"]
 [ext_resource type="Script" uid="uid://bjj58wf8jp5j1" path="res://scripts/routes.gd" id="1_mkb65"]
+
+[sub_resource type="Gradient" id="Gradient_exab7"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5hl1f"]
+gradient = SubResource("Gradient_exab7")
+fill_from = Vector2(0.495413, 1)
+fill_to = Vector2(0.518349, 0.266055)
 
 [node name="Routes" type="Control"]
 layout_mode = 3
@@ -51,7 +59,7 @@ layout_mode = 0
 offset_left = 1084.0
 offset_top = 9.0
 offset_right = 1903.0
-offset_bottom = 1049.0
+offset_bottom = 886.0
 
 [node name="planes" type="VBoxContainer" parent="scroll"]
 layout_mode = 2
@@ -100,6 +108,16 @@ offset_top = 249.0
 offset_right = 286.0
 offset_bottom = 294.0
 text = "Slots"
+
+[node name="gradient" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.439216)
+layout_mode = 2
+offset_left = 1084.0
+offset_top = 884.0
+offset_right = 1930.0
+offset_bottom = 948.0
+size_flags_horizontal = 3
+texture = SubResource("GradientTexture2D_5hl1f")
 
 [connection signal="item_selected" from="from" to="." method="_on_from_item_selected"]
 [connection signal="item_selected" from="to" to="." method="_on_to_item_selected"]

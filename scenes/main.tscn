@@ -61,56 +61,62 @@ current_tab = 0
 
 [node name="Flying" type="ScrollContainer" parent="tabs"]
 layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 0
 
-[node name="container" type="VBoxContainer" parent="tabs/Flying"]
+[node name="margin" type="MarginContainer" parent="tabs/Flying"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = -30
+
+[node name="container" type="VBoxContainer" parent="tabs/Flying/margin"]
 custom_minimum_size = Vector2(1920, 200)
 layout_mode = 2
 
-[node name="q400" type="VBoxContainer" parent="tabs/Flying/container"]
+[node name="q400" type="VBoxContainer" parent="tabs/Flying/margin/container"]
 layout_mode = 2
 
-[node name="text" type="Label" parent="tabs/Flying/container/q400"]
+[node name="text" type="Label" parent="tabs/Flying/margin/container/q400"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Dash 8-400"
 
-[node name="line" type="Line2D" parent="tabs/Flying/container/q400"]
+[node name="line" type="Line2D" parent="tabs/Flying/margin/container/q400"]
 points = PackedVector2Array(0, 0, 500, 0)
 width = 2.0
 
-[node name="a220" type="VBoxContainer" parent="tabs/Flying/container"]
+[node name="a220" type="VBoxContainer" parent="tabs/Flying/margin/container"]
 layout_mode = 2
 
-[node name="line" type="Line2D" parent="tabs/Flying/container/a220"]
+[node name="line" type="Line2D" parent="tabs/Flying/margin/container/a220"]
 points = PackedVector2Array(0, 0, 500, 0)
 width = 2.0
 
-[node name="text" type="Label" parent="tabs/Flying/container/a220"]
+[node name="text" type="Label" parent="tabs/Flying/margin/container/a220"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "A220-300"
 
-[node name="a338" type="VBoxContainer" parent="tabs/Flying/container"]
+[node name="a338" type="VBoxContainer" parent="tabs/Flying/margin/container"]
 layout_mode = 2
 
-[node name="line" type="Line2D" parent="tabs/Flying/container/a338"]
+[node name="line" type="Line2D" parent="tabs/Flying/margin/container/a338"]
 points = PackedVector2Array(0, 0, 500, 0)
 width = 2.0
 
-[node name="text" type="Label" parent="tabs/Flying/container/a338"]
+[node name="text" type="Label" parent="tabs/Flying/margin/container/a338"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "A330-900neo"
 
-[node name="a350" type="VBoxContainer" parent="tabs/Flying/container"]
+[node name="a350" type="VBoxContainer" parent="tabs/Flying/margin/container"]
 layout_mode = 2
 
-[node name="line" type="Line2D" parent="tabs/Flying/container/a350"]
+[node name="line" type="Line2D" parent="tabs/Flying/margin/container/a350"]
 points = PackedVector2Array(0, 0, 500, 0)
 width = 2.0
 
-[node name="text" type="Label" parent="tabs/Flying/container/a350"]
+[node name="text" type="Label" parent="tabs/Flying/margin/container/a350"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "A350-900ULR"
