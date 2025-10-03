@@ -18,8 +18,8 @@ theme = ExtResource("1_yq38w")
 script = ExtResource("1_wok0s")
 
 [node name="plane" type="Sprite2D" parent="."]
-position = Vector2(623, 165)
-scale = Vector2(0.202163, 0.202163)
+position = Vector2(625, 255)
+scale = Vector2(0.74972, 0.74972)
 texture = ExtResource("2_ntwb0")
 
 [node name="name" type="Label" parent="."]

@@ -27,11 +27,11 @@ offset_bottom = 39.0
 
 [node name="code" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1509.0
-offset_top = 6.0
-offset_right = 1891.0
-offset_bottom = 255.0
-theme_override_font_sizes/font_size = 182
+offset_left = 19.0
+offset_top = 357.0
+offset_right = 1033.0
+offset_bottom = 1023.0
+theme_override_font_sizes/font_size = 512
 text = "XXX"
 horizontal_alignment = 1
 

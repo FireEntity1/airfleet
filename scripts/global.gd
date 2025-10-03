@@ -79,7 +79,7 @@ const PLANES = [
 	
 	{
 		"id": "a359",
-		"name": "Airbus A350-1000ULR",
+		"name": "Airbus A350-900ULR",
 		"registration": "C-XXXX",
 		"cost": 380000000,
 		"capacity": 400,
@@ -264,8 +264,8 @@ func _ready():
 		save_file = {
 			"planes": [PLANES[0].duplicate(true), PLANES[1].duplicate(true)],
 			"airports": AIRPORTS.duplicate(true),
-			"money": 1000000,
-			"total_profit": 1000000,
+			"money": 10000000,
+			"total_profit": 10000000,
 			"initial_completed": false,
 			"active_events": []
 		}

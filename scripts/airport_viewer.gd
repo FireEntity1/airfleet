@@ -36,13 +36,17 @@ func _on_lounge_button_up():
 	if not Global.save_file.airports[active_airport].upgrades.lounge:
 		Global.save_file.airports[active_airport].upgrades.lounge = true
 		Global.save(Global.save_file)
+		_on_airport_picker_item_selected(active_airport)
+
 
 func _on_jetbridge_button_up():
 	if not Global.save_file.airports[active_airport].upgrades.jetbridges:
 		Global.save_file.airports[active_airport].upgrades.jetbridges = true
 		Global.save(Global.save_file)
+		_on_airport_picker_item_selected(active_airport)
 
 func _on_eco_fuel_button_up():
 	if not Global.save_file.airports[active_airport].upgrades.eco_fuel:
 		Global.save_file.airports[active_airport].upgrades.eco_fuel = true
 		Global.save(Global.save_file)
+		_on_airport_picker_item_selected(active_airport)
